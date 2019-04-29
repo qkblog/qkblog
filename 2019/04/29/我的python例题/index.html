@@ -19,8 +19,7 @@
     <meta name="keywords" content>
 
 
-    <meta name="description" content="大家好，初次部署博客，请大家多多关照
-">
+    <meta name="description" content="题目1：实现一个数字游戏，1-100之间随机猜一个数字，猜错继续，猜对结束代码：shuzi.pyimport randomprint(‘*这是钱锴写的数字小游戏**‘)print(‘***欢迎体...">
 
 
 
@@ -32,7 +31,7 @@
     <!--Title-->
 
 
-<title>我的帖子 | Hexo</title>
+<title>我的python例题 | Hexo</title>
 
 
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -117,7 +116,7 @@
                             </li>
                         
                             <li role="presentation" class="text-center">
-                                <a href="/qk/脚本/"><i class="fa "></i>脚本</a>
+                                <a href="/qk/脚本/index.html"><i class="fa "></i>脚本</a>
                             </li>
                         
                             <li role="presentation" class="text-center">
@@ -137,9 +136,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="我的帖子">
+        <h1 id="我的python例题">
             
-	            我的帖子
+	            我的python例题
             
         </h1>
         <div class="post-meta">
@@ -163,7 +162,7 @@
         
         <span class="fa-wrap">
             <i class="fa fa-clock-o"></i>
-            <span class="date-meta">2019/04/28</span>
+            <span class="date-meta">2019/04/29</span>
         </span>
         
     
@@ -173,7 +172,16 @@
     </div>
     
     <div class="post-body post-content">
-        <p>大家好，初次部署博客，请大家多多关照</p>
+        <p>题目1：实现一个数字游戏，1-100之间随机猜一个数字，猜错继续，猜对结束<br>代码：shuzi.py<br>import random<br>print(‘<strong><strong>*</strong></strong>这是钱锴写的数字小游戏<strong><strong>**</strong></strong>‘)<br>print(‘<strong><strong><strong>***</strong></strong></strong>欢迎体验<strong><strong><strong><strong>**</strong></strong></strong></strong>‘)<br>a=random.randint(1,100)<br>count=0<br>while True:<br>        b=input(‘请你输入一个1到100之间的整数：’)<br>        if b.isdigit():<br>                count += 1<br>                b=int(b)<br>                if b==a:<br>                        print(‘恭喜你猜对了，你猜的次数是’,count)<br>                        c=input(‘尊敬的玩家，您是否要再次玩这个游戏(y or n):\n’)<br>                        if c==’y’:<br>                                count=0<br>                                a=random.randint(1,100)<br>                                continue<br>                        elif c==’n’:<br>                                print(‘#############游戏结束了，欢迎下次在玩###########’)<br>                                break<br>                        else:<br>                                print(‘输入的格式不对，游戏自动退出’)<br>                                break<br>                elif b&lt;a:<br>                        print(‘你猜的数小了\n’)<br>                elif b&gt;a:<br>                        print(‘你猜的数大了\n’)<br>        else:<br>                print(‘输入的值不符合标准！’)<br>                continue</p>
+<p>题目2：任意输入2个整数，会输出这2个整数之间的素数和偶数<br>代码：sushu.py<br>s=[]<br>sum=input(‘请输入任意2个整数：’)<br>for i in sum.split():<br>        i=int(i)<br>        s.append(i)</p>
+<p>s=sorted(s)<br>q=[i for i in range(int(s[0]),int(s[1])+1) if i % 2 == 0]<br>k=[i for i in range(int(s[0]),int(s[1])+1) if i % 2 != 0]</p>
+<p>print(‘整数’,s[0],’和整数’,s[1],’之间的偶数有：’,q)<br>print(‘整数’,s[0],’和整数’,s[1],’之间的素数有：’,k)</p>
+<p>题目3：输入任意一个整数，会输出这个数的平方，绝对值并判断这个数是否是素数？<br>       有2中执行结果，要求可以选择，选择定制版会输出以下结果<br>       +<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>*</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>+<br>        计算结果：绝对值是 123 平方是 15129 是素数<br>       +<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>*</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>+<br>代码1(定义了2个方法)：model.py<br>import os<br>def qk(d=12):<br>        global a<br>        global b<br>        global c<br>        d = 12<br>        shu = input(‘请输入一个整数:’)<br>        try:<br>                shu = int(shu)<br>        except ValueError:<br>                print(‘你输入的不是一个整数’)<br>        a = abs(shu)<br>        b = shu * shu<br>        c = shu % 2<br>        print(‘这个数的绝对值是:’,a)<br>        print(‘这个数的平方是:’,b)<br>        if c == 0:<br>                print(‘这个数不是素数’)<br>        else:<br>                print(‘这个数是素数’)</p>
+<p>def qkk():<br>        qk()<br>        os.system(‘clear’)<br>        if c == 0:<br>                print(‘+<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>*</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>+’)<br>                print(‘计算结果：绝对值是’,a,’平方是’,b,’不是素数’)<br>                print(‘+<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>*</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>+’)<br>        else:<br>                print(‘+<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>*</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>+’)<br>                print(‘计算结果：绝对值是’,a,’平方是’,b,’是素数’)<br>                print(‘+<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>*</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>+’)</p>
+<p>if <strong>name</strong> == “<strong>main</strong>“:<br>        try:<br>                qk()<br>        except:<br>                pass</p>
+<p>代码2(通过选择调用model.py中的方法)：<br>import model<br>print(‘尊敬的客户你好，项目已经完成了’)<br>print(‘项目的结果有2种，输入（1/2）选择不同的结果’)<br>print(‘1是普通版，2是定制版’)<br>result = input(‘请您输入1/2：’)<br>result = int(result)<br>if result == 1:<br>        try:<br>                model.qk()<br>        except:<br>                pass</p>
+<p>elif result == 2:<br>        try:<br>                model.qkk()<br>        except:<br>                pass</p>
+<p>持续更新中。。。。。</p>
 
     </div>
     
@@ -191,11 +199,11 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2019/04/29/oracle基础/" class="pre-post btn btn-default" title="oracle基础测试一下">
-            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">oracle基础测试一下</span>
-        </a>
     
+        <a href="/2019/04/29/oracle基础/" class="next-post btn btn-default" title="oracle基础测试一下">
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">oracle基础测试一下</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
     
 </div>
 
