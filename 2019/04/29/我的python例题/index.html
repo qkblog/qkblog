@@ -181,6 +181,9 @@
 <p>if <strong>name</strong> == “<strong>main</strong>“:<br>        try:<br>                qk()<br>        except:<br>                pass</p>
 <p>代码2(通过选择调用model.py中的方法)：<br>import model<br>print(‘尊敬的客户你好，项目已经完成了’)<br>print(‘项目的结果有2种，输入（1/2）选择不同的结果’)<br>print(‘1是普通版，2是定制版’)<br>result = input(‘请您输入1/2：’)<br>result = int(result)<br>if result == 1:<br>        try:<br>                model.qk()<br>        except:<br>                pass</p>
 <p>elif result == 2:<br>        try:<br>                model.qkk()<br>        except:<br>                pass</p>
+<p>题目4：输入任意数量的整数，最后会输出3个列表，1个列表输出全部整数，1列表个输出这些整数中的正数，1个列表输出这些整数中的负数<br>代码：1.py<br>lie1=[]<br>lie2=[]<br>lie3=[]<br>a=input(‘请输入20个数，每个数之间用,隔开：’)<br>for i in a.split():<br>        lie1.append(int(i))</p>
+<p>for i in lie1:<br>        if i&lt;0:<br>                lie2.append(int(i))<br>        elif i&gt;0:<br>                lie3.append(int(i))</p>
+<p>print(‘包括所有数的列表1是:’,lie1)<br>print(‘包括负数的列表2是:’,lie2)<br>print(‘包括正数的列表3是:’,lie3)</p>
 <p>持续更新中。。。。。</p>
 
     </div>
@@ -198,6 +201,11 @@
 </article>
 
 <div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2019/04/29/我的shell脚本/" class="pre-post btn btn-default" title="我的shell脚本">
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs">我的shell脚本</span>
+        </a>
     
     
         <a href="/2019/04/29/oracle基础/" class="next-post btn btn-default" title="oracle基础测试一下">
