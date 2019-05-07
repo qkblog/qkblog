@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<html lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="Hexo">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://yoursite.com">
+    <!--SEO-->
+
+    <meta name="keywords" content>
+
+
+    <meta name="description" content="项目说明：该系统是集合mysql nginx kibana openldap kafka keyclock elasticsearch redis zookeeper 中间件以及我公司自主研发的...">
+
+
+
+<meta name="robots" content="all">
+<meta name="google" content="all">
+<meta name="googlebot" content="all">
+<meta name="verify" content="all">
+
+    <!--Title-->
+
+
+<title>我的自动化部署脚本 | Hexo</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
+
+</head>
+
+</html>
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
+<body>
+    <header class="main-header" style="background-image:url(http://snippet.shenliyang.com/img/banner.jpg)">
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title="John Doe">
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
+        </a>
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                 <img src="/img/branding.png" alt="Snippet 博客主题" class="img-responsive center-block">
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed pull-right" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
+                    <a class="navbar-brand" href="http://yoursite.com">Hexo</a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>首页</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/qk/公司项目/"><i class="fa "></i>公司项目</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/qk/技术方案/"><i class="fa "></i>技术方案</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/qk/脚本/"><i class="fa "></i>脚本</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/archives/"><i class="fa "></i>时间轴</a>
+                            </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="我的自动化部署脚本">
+            
+	            我的自动化部署脚本
+            
+        </h1>
+        <div class="post-meta">
+    
+        <span class="categories-meta fa-wrap">
+            <i class="fa fa-folder-open-o"></i>
+            
+        </span>
+    
+
+    
+        <span class="fa-wrap">
+            <i class="fa fa-tags"></i>
+            <span class="tags-meta">
+                
+            </span>
+        </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2019/05/07</span>
+        </span>
+        
+    
+</div>
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>项目说明：<br>该系统是集合mysql nginx kibana openldap kafka keyclock elasticsearch redis zookeeper 中间件以及我公司自主研发的一套监控告警展示平台<br>由于需要部署的中间件很多，需要修改的配置也很多，并且需要部署全国32个省份，所以需要采取自动化脚本部署，节省人力时间</p>
+<p>脚本执行顺序以及说明：<br>部署ums监控告警系统需要2台机器，1台机器只部署ums应用，另一台部署中间件和mysql数据库（要分清楚！）<br>(1) 部署中间件主机，首先使用root用户执行root.sh脚本，该脚本是创建ums用户和配置环境的脚本<br>    root.sh脚本：</p>
+<p>#!/bin/bash<br>function YUM()<br>{<br>q=<code>whoami</code><br>if [ “$q” != “root” ];then<br>echo “请用root用户执行该脚本！”<br>exit 0<br>else<br>echo “现在检查yum源是否可用？请等待…”<br>yum clean all &gt;&gt;/dev/null 2&gt;&amp;1<br>yum makecache &gt;&gt;/dev/null 2&gt;&amp;1<br>sleep 5<br>    if [ $? -eq 0 ];then<br>        echo “#######################################################”<br>        echo “现在用yum安装一些软件，请等待…”<br>        yum install automake autoconf libtool make gcc gcc-c++ <em>ltdl</em> pcre-devel openssl openssl-devel -y &gt;&gt;/dev/null 2&gt;&amp;1<br>        sleep 20<br>        if [ $? -eq 0 ];then<br>                                echo “一些依赖包已经安装完成”<br>                                echo “#######################################################”<br>                        else<br>                                echo “安装依赖包时似乎出现了问题！请自己用yum命令安装，检查！”<br>                exit 0<br>                        fi<br>        yum groupinstall “Development Tools” -y &gt;&gt;/dev/null 2&gt;&amp;1<br>        sleep 10<br>            if [ $? -eq 0 ];then<br>                echo “一些依赖包已经安装完成”<br>                echo “#######################################################”<br>            else<br>                echo “安装依赖包时似乎出现了问题！请自己用yum命令安装，检查！”<br>                exit 0<br>            fi<br>    else<br>        echo “你的yum有问题，无法使用，请先配置好yum源在执行脚本！”<br>        exit 0<br>    fi<br>fi</p>
+<p>}<br>function yonghu()<br>{<br>q=<code>whoami</code><br>if [ $q != root ];then<br>echo “请用root用户执行该脚本！”<br>exit 0<br>else<br>echo “###############################创建ums用户###################################”<br>if [ -d /opt/aspire/product/ums ];then<br>echo “/opt/aspire/product/ums1目录已经存在，请备份后删除该目录，在重新执行该脚本！”<br>exit 0<br>else<br>echo “现在开始创建ums用户”<br>useradd -d /opt/aspire/product/ums ums<br>    if [ $? -eq 0 ];then<br>    echo “ums” | passwd –stdin ums<br>    echo “ums用户创建成功,密码是ums”<br>    echo “+++++++++++++++++++++++++++++++++++++++”<br>    echo “赋予ums用户/usr/local目录的读写权限！”<br>    setfacl -R -m user:ums:rwx /usr/local<br>    setfacl -m user:ums:rwx /opt<br>        if [ $? -eq 0 ];then<br>            echo “用户ums赋予权限成功”<br>            echo “+++++++++++++++++++++++++++++++++++++++”<br>        else<br>            echo “用户ums赋予权限失败！”<br>            echo “请手动执行 setfacl -R -m user:ums:rwx /usr/local 赋权！”<br>            exit 0<br>        fi<br>    else<br>    echo “ums用户创建失败，请自行检查！”<br>    exit 0<br>    fi<br>fi<br>fi<br>}<br>function host()<br>{<br>q=<code>whoami</code><br>if [ $q != root ];then<br>echo “请用root用户执行该脚本！”<br>exit 0<br>else<br>echo “##########################################################”<br>echo “现在开始配置/etc/hosts文件”<br>read -p “请输入部署ums应用的主机IP：” ip<br>read -p “请输入部署ums应用的主机名：” name<br>read -p “请输入部署ums中间件的主机IP：” IP<br>read -p “请输入部署ums应用的主机名：”  NAME<br>cat &gt;&gt; /etc/hosts &lt;&lt;EOF<br>$ip    $name<br>$IP    $NAME<br>EOF<br>echo “/etc/hosts文件已经更改完成”<br>echo “##########################################################”<br>fi<br>}</p>
+<p>function neihe()<br>{<br>q=<code>whoami</code><br>if [ $q != root ];then<br>echo “请用root用户执行该脚本！”<br>exit 0<br>else<br>echo “###########################################################”<br>echo “该模块是添加内核参数vm.max_map_count = 655360”<br>cp /etc/sysctl.conf /etc/sysctl.conf.bak<br>echo “vm.max_map_count = 655360” &gt;&gt; /etc/sysctl.conf<br>sysctl -p &gt;&gt; /dev/null 2&gt;&amp;1<br>q=<code>sysctl -p|grep &quot;vm.max_map_count = 655360&quot;</code><br>if [ -n “$q” ];then<br>echo “/etc/sysctl.conf已经修改完毕并且生效！”<br>else<br>echo “内核参数修改失败，请自己检查/etc/sysctl.conf文件！”<br>echo “/etc/sysctl.conf.bak是备份文件，要恢复可以自行恢复”<br>fi<br>echo “++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++”<br>echo “现在修改/etc/security/limits.conf文件”<br>if [ -e /etc/security/limits.conf.bak ];then<br>echo “<em>       hard  nofile  65536” &gt;&gt;/etc/security/limits.conf<br>echo “</em>       soft  nofile  65536” &gt;&gt;/etc/security/limits.conf<br>echo “limits.conf已经修改完毕,请退出root用户重新登录使其生效！”<br>echo “如果想恢复请查看/etc/security/limits.conf.bak文件，这个是备份文件”<br>else<br>cp /etc/security/limits.conf /etc/security/limits.conf.bak<br>echo “<em>       hard  nofile  65536” &gt;&gt;/etc/security/limits.conf<br>echo “</em>       soft  nofile  65536” &gt;&gt;/etc/security/limits.conf<br>echo “limits.conf已经修改完毕,请退出root用户重新登录使其生效！”<br>echo “如果想恢复请查看/etc/security/limits.conf.bak文件，这个是备份文件”<br>fi<br>fi<br>}</p>
+<p>echo “################################################################################################”<br>echo “该脚本有4个模块，1是创建用户、2是修改hosts文件,3是修改内核参数,4是用yum安装一些依赖包,all是全部执行”<br>read -p “请输入你的选择（1/2/3/4/all）:” anwser<br>case $anwser in<br>1)<br>yonghu;;<br>2)<br>host<br>;;<br>3)<br>neihe<br>;;<br>4)<br>YUM<br>;;<br>all)<br>yonghu &amp;&amp; host &amp;&amp; neihe &amp;&amp; YUM<br>;;<br>*)<br>echo “输入格式不对!”<br>exit 0<br>esac        </p>
+<p>(2) 之后使用ums用户，在ums家目录/opt/aspire/product/ums目录下执行umsfile.sh脚本，改脚本是获取软件包的脚本（根据脚本的提示选择正确的选项执行脚本）<br>    getfile.sh:</p>
+<p>#!/bin/bash<br>function getzhong()<br>{<br>yonghu=<code>whoami</code><br>if [ $yonghu = ums ];then<br>mkdir /opt/aspire/product/ums/soft<br>echo ‘当前是ums用户’<br>read -p ‘请确定当前主机是否是部署中间件的主机（y/n）’ Y<br>case $Y in<br>y)<br>echo ‘现在开始取部署ums中间件的软件包!’<br>echo “时间比较长，请耐心等待。。。。”</p>
+<p>ftp -n -i 210.75.5.240 &lt;&lt;EOF<br>user miscfile miscfile<br>bin<br>lcd /opt/aspire/product/ums/soft/<br>cd /qpl/soft<br>mget <em><br>bye<br>EOF<br>;;<br>n)<br>echo ‘请确保当前主机是部署ums中间件的主机!’<br>exit 0<br>;;
+</em>)<br>echo ‘输入内容不对!’<br>exit 0<br>esac<br>else<br>echo ‘请使用ums用户执行该脚本’<br>exit 0<br>fi</p>
+<p>cd /opt/aspire/product/ums/soft<br>shu=<code>ls |wc -l</code><br>if [ $shu -eq 13 ];then<br>echo “中间件软件全部下载完成，共13个”<br>else<br>echo “下载的中间件软件有缺失！”<br>echo “请自行到ftp 210.75.5.240上，/qpl/soft目录下下载软件！”<br>fi<br>}</p>
+<p>function getying()<br>{<br>yonghu=<code>whoami</code><br>if [ $yonghu = ums ];then<br>mkdir /opt/aspire/product/ums/soft<br>echo ‘当前是ums用户’<br>read -p ‘请确定当前主机是否是部署ums应用的主机（y/n）’ Y<br>case $Y in<br>y)<br>echo ‘现在开始取部署ums应用的软件包!’<br>echo ‘时间比较长，请耐心等待。。。。’ </p>
+<p>ftp -n -i 210.75.5.240 &lt;&lt;EOF<br>user miscfile miscfile<br>bin<br>lcd /opt/aspire/product/ums/soft/<br>cd /qpl/ums<br>mget <em><br>bye<br>EOF<br>;;<br>n)<br>echo ‘请确保当前主机是部署ums应用的主机!’<br>exit 0<br>;;
+</em>)<br>echo ‘输入内容不对!’<br>exit 0<br>esac<br>else<br>echo ‘请使用ums用户执行该脚本’<br>exit 0<br>fi</p>
+<p>cd /opt/aspire/product/ums/soft<br>shu=<code>ls |wc -l</code><br>if [ $shu -eq 18 ];then<br>echo “ums应用软件全部下载完成，共17个”<br>else<br>echo “下载的ums应用软件有缺失！”<br>echo “请自行到ftp 210.75.5.240上，/qpl/ums目录下下载软件！”<br>fi<br>}</p>
+<p>echo “###################################################################”<br>echo “该脚本是获取软件的脚本”<br>echo “请确定该主机是部署中间件的主机还是ums应用的主机？”<br>read -p “请输入(1/2),1代表部署ums应用的主机、2代表部署中间件的主机：” qk<br>case $qk in<br>1)<br>read -p “请再次确认是否是部署ums应用的主机（y/n）:” Q<br>    if [ $Q = y ];then<br>    getying<br>    else<br>    exit 0<br>    fi<br>;;<br>2)<br>read -p “请再次确认是否是部署中间件的主机（y/n）:” K<br>        if [ $K = y ];then<br>        getzhong<br>        else<br>        exit 0<br>        fi<br>;;<br>*)<br>echo “输入格式不对！”<br>exit 0<br>esac</p>
+<p>(3) 确保前2个脚本执行完毕无报错后，使用ums用户在家目录执行install.sh脚本，该脚本是一键部署ums中间件和配置java环境的脚本，ums中间件有（jdk、zookeeper、elasticsearch、kafka、redis、nginx、kibana、BerkeleyDB、OpenLDAP、keycloak）请仔细查看脚本执行过程，是否所有中间件都安装并启动成功，并根据脚本提示去网页上验证！<br>    install.sh:</p>
+<p>#!/bin/bash<br>zIP=10.203.102.55<br>yIP=10.203.102.54<br>echo “####################################”<br>read -p “请输入部署中间件主机ip:” zip<br>read -p “请输入部署ums应用的主机ip:” yip<br>echo “####################################”</p>
+<p>function jdk()<br>{<br>yonghu=<code>whoami</code><br>if [ $yonghu = ums ];then<br>echo ‘当前是ums用户’<br>echo “正在部署JDK,请等待。。。”<br>cd /opt/aspire/product/ums/soft/<br>if [ $? -eq 0 ];then<br>tar xvf jdk1.8.0_121.tar -C /opt/aspire/product/ums/ &gt;&gt;/dev/null 2&gt;&amp;1<br>    if [ $? -eq 0 ];then<br>    cat &gt;/opt/aspire/product/ums/.bash_profile &lt;&lt;EOF</p>
+<h1 id="bash-profile"><a href="#bash-profile" class="headerlink" title=".bash_profile"></a>.bash_profile</h1><h1 id="Get-the-aliases-and-functions"><a href="#Get-the-aliases-and-functions" class="headerlink" title="Get the aliases and functions"></a>Get the aliases and functions</h1><p>if [ -f ~/.bashrc ]; then<br>    . ~/.bashrc<br>fi</p>
+<h1 id="User-specific-environment-and-startup-programs"><a href="#User-specific-environment-and-startup-programs" class="headerlink" title="User specific environment and startup programs"></a>User specific environment and startup programs</h1><p>PATH=\$PATH:\$HOME/bin<br>export JAVA_HOME=/opt/aspire/product/ums/jdk1.8.0_121<br>export JRE_HOME=\${JAVA_HOME}/jre<br>export CLASSPATH=.:\${JAVA_HOME}/lib:\${JRE_HOME}/lib<br>export PATH=\${JAVA_HOME}/bin:\$PATH<br>export MYSQL_HOME=/opt/mysql/installdir<br>export PATH=\$MYSQL_HOME/bin:\$PATH<br>export CPPFLAGS=-I/usr/local/berkeleydb/include<br>export LDFLAGS=-L/usr/local/berkeleydb/lib<br>export LD_LIBRARY_PATH=/usr/local/berkeleydb/lib</p>
+<p>export PATH<br>EOF<br>    else<br>    echo “JDK解压失败，请检查/opt/aspire/product/ums/soft目录下是否有JDK包？”<br>    fi<br>else<br>echo “进入/opt/aspire/product/ums/soft/目录失败，请检查是否存在该目录？”<br>exit 0<br>fi<br>else<br>echo “当前用户不是ums用户！请用ums用户执行该脚本”<br>exit 0<br>fi<br>echo -e “\033[32m JDK部署完毕 \033[0m”<br>source /opt/aspire/product/ums/.bash_profile<br>echo “脚本运行结束后，请手动执行 java -version，检查JDK是否部署成功？”<br>echo “如果未成功，请手动执行 source /opt/aspire/product/ums/.bash_profile 命令”<br>echo “####################################################################################”<br>}</p>
+<p>function zookeeper()<br>{<br>echo “####################################################################################”<br>echo “现在开始部署zookeeper”<br>cd /opt/aspire/product/ums/soft/<br>tar xvf zookeeper.tar -C /opt/aspire/product/ums/ &gt;&gt;/dev/null 2&gt;&amp;1<br>        if [ $? -eq 0 ];then<br>    cd /opt/aspire/product/ums/zookeeper/zookeeper-3.4.10/bin<br>    echo &gt; nohup.out<br>    PID=<code>ps -ef |grep zookeeper |grep -v grep |awk &#39;{print $2}&#39;</code><br>               if [ -n “$PID” ];then<br>            echo “检查到有之前残留的zookeeper进程，现在杀掉它！”<br>             kill -9 $PID<br>                    if [ $? -eq 0 ];then<br>                        echo “之前残留的zookeeper进程已经杀死，现在重新启动。”<br>            nohup ./zkServer.sh start ../conf/zoo.cfg &amp;<br>            sleep 5<br>            PID=<code>ps -ef |grep zookeeper |grep -v grep |awk &#39;{print $2}&#39;</code><br>                if [ -n “$PID” ];then<br>                echo -e “\033[32m zookpeer已经启动成功，PID是$PID,可以自己检查！\033[0m”<br>                else<br>                echo -e “\033[31m 由于某些原因zookpeer,没有启动成功！请自己检查一下！\033[0m”<br>                exit 0<br>                fi<br>            else<br>                echo -e “\033[31m 残留的zookeeper进程杀死失败，请自行kill \033[0m”<br>                exit 0<br>            fi<br>        else<br>            nohup ./zkServer.sh start ../conf/zoo.cfg &amp;<br>                        sleep 5<br>                        PID=<code>ps -ef |grep zookeeper |grep -v grep |awk &#39;{print $2}&#39;</code><br>                        if [ -n “$PID” ];then<br>                        echo -e “\033[32m zookpeer已经启动成功，PID是$PID,可以自己检查！\033[0m”<br>                        else<br>                        echo -e “\233[5;32m 由于某些原因zookpeer,没有启动成功！请自己检查一下！\033[0m”<br>                        exit 0<br>                        fi<br>        fi</p>
+<pre><code>else 
+echo &quot;解压zookeeper.tar包失败，请确保该包在/opt/aspire/product/ums/soft/目录！&quot;
+exit 0
+fi
+</code></pre><p>}</p>
+<p>function elasticsearch()<br>{<br>echo “####################################################################################”<br>echo “现在开始部署elasticsearch”<br>cd /opt/aspire/product/ums/soft/<br>tar xvf elasticsearch-5.6.0.tar -C /opt/aspire/product/ums/ &gt;&gt;/dev/null 2&gt;&amp;1<br>        if [ $? -eq 0 ];then<br>    cd /opt/aspire/product/ums/elasticsearch-5.6.0/config/<br>    sed -i “s/$zIP/$zip/g” elasticsearch.yml<br>    cd /opt/aspire/product/ums/elasticsearch-5.6.0/bin<br>    sleep 2<br>    echo &gt; nohup.out<br>    PID=<code>ps -ef |grep elasticsearch |grep -v grep |awk &#39;{print $2}&#39;</code><br>    if [ -n “$PID” ];then<br>    echo “检查到有之前残留的elasticsearch进程，现在杀掉它！”<br>    kill -9 $PID<br>        if [ $? -eq 0 ];then<br>            echo “之前残留的elasticsearch进程已经杀死，现在重新启动。”<br>            nohup ./elasticsearch &amp;<br>                sleep 5<br>                  PID=<code>ps -ef |grep elasticsearch |grep -v grep |awk &#39;{print $2}&#39;</code><br>                    if [ -n “$PID” ];then<br>                        echo -e “\033[32m elasticesrarch已经启动成功，PID是$PID,可以自己检查！\033[0m”<br>                    else<br>                    echo -e “\033[31m 由于某些原因elasticesrarch,没有启动成功！请自己检查一下！\233[om”<br>                    exit 0<br>                    fi<br>        else<br>            echo “elasticsearch进程杀死失败，原因未知，请自行检查！”<br>            exit 0<br>        fi<br>    else<br>    nohup ./elasticsearch &amp;<br>    sleep 5<br>    PID=<code>ps -ef |grep elasticsearch |grep -v grep |awk &#39;{print $2}&#39;</code><br>        if [ -n “$PID” ];then<br>                echo -e “\033[32m elasticesrarch已经启动成功，PID是$PID,可以自己检查！\033[0m”<br>                else<br>                echo -e “\033[31m 由于某些原因elasticesrarch,没有启动成功！请自己检查一下！\033[0m”<br>                exit 0<br>                fi<br>    fi<br>    else<br>    echo “解压elasticsearch-5.6.0.tar包失败，请确保该包在/opt/aspire/product/ums/soft/目录！”<br>    exit 0<br>    fi</p>
+<p>}</p>
+<p>function kafka()<br>{<br>echo “############################################################################”<br>echo “现在开始部署kafka中间件”<br>cd /opt/aspire/product/ums/soft<br>tar xvf kafka.tar -C /opt/aspire/product/ums/ &gt;&gt;/dev/null 2&gt;&amp;1<br>        if [ $? -eq 0 ];then<br>        cd /opt/aspire/product/ums/kafka/kafka_2.12-0.10.2.1/bin<br>        echo &gt; nohup.out<br>        PID=<code>ps -ef |grep kafka |grep -v grep |awk &#39;{print $2}&#39;</code><br>        if [ -n “$PID” ];then<br>            echo “检查到有之前残留的kafka进程，现在杀掉它！”<br>               kill -9 $PID<br>        echo “之前残留的kafka进程已经杀死，现在开始重新启动kafka!”<br>        nohup ./kafka-server-start.sh -daemon ../config/server.properties<br>                sleep 5<br>                q=<code>jps |grep kafka</code><br>                    if [ -n $q ];then<br>                            echo -e “\033[32m kafka已经启动成功 \033[0m”<br>                    else<br>                            echo -e “\033[31m kafka启动失败，请自行检查日志 nohup.out文件 \033[0m”<br>                       fi<br>        else<br>               nohup ./kafka-server-start.sh -daemon ../config/server.properties<br>        sleep 5<br>        q=<code>jps |grep kafka</code><br>            if [ -n $q ];then<br>                echo -e “\033[32m kafka已经启动成功 \033[0m”<br>            else<br>                echo -e “\033[31m kafka启动失败，请自行检查日志 nohup.out文件 \033[0m”<br>            fi<br>        fi<br>    else<br>        echo “解压kafka.tar包失败，请确保该包在/opt/aspire/product/ums/soft/目录”<br>        exit 0<br>    fi</p>
+<p>}</p>
+<p>function redis()<br>{<br>echo “#####################################################################”<br>echo “现在开始部署redis”<br>cd /opt/aspire/product/ums/soft<br>tar xvf redis-4.0.6.tar -C /opt/aspire/product/ums/ &gt;&gt;/dev/null 2&gt;&amp;1<br>if [ $? -eq 0 ];then<br>    cd /opt/aspire/product/ums/redis-4.0.6/src<br>    PID=<code>ps -ef |grep redis |grep -v grep |awk &#39;{print $2}&#39;</code><br>                if [ -n “$PID” ];then<br>                echo “检查到有之前残留的redis进程，现在杀掉它！”<br>                kill -9 $PID<br>                echo “之前残留的redis进程已经杀死，现在开始重新启动redis!”<br>                nohup ./redis-server  ../redis.conf<br>                sleep 5<br>        ./redis-cli -a ums123 &lt;&lt; EOF &gt;./1.txt<br>        ping<br>EOF<br>        q=<code>cat 1.txt</code><br>            if [ $q = PONG ];then<br>            echo -e “\033[32m redis 已经启动成功 \033[0m”<br>            else<br>            echo -e “\033[31m redis启动失败，请自行检查报错日志 nohup.out文件 \033[0m”<br>            fi<br>        else<br>            nohup ./redis-server  ../redis.conf<br>                sleep 5<br>                ./redis-cli -a ums123 &lt;&lt; EOF &gt;./1.txt<br>                ping<br>EOF<br>                q=<code>cat 1.txt</code><br>                        if [ $q = PONG ];then<br>                        echo -e “\033[32m redis 已经启动成功 \033[0m”<br>                        else<br>                        echo -e “\233[5;31m redis启动失败，请自行检查报错日志 nohup.out文件 \033[0m”<br>                        fi</p>
+<pre><code>fi
+</code></pre><p>else<br>    echo “解压redis-4.0.6.tar包失败，请确保该包在/opt/aspire/product/ums/soft/目录”<br>    exit 0<br>fi<br>}</p>
+<p>function kibana()<br>{<br>echo “################################################################################”<br>echo “现在开始部署kibana”<br>cd /opt/aspire/product/ums/soft<br>tar zxvf kibana-5.6.0-linux-x86_64.tar.gz -C /opt/aspire/product/ums/ &gt;&gt;/dev/null 2&gt;&amp;1<br>if [ $? -eq 0 ];then<br>    cd /opt/aspire/product/ums/kibana-5.6.0-linux-x86_64/config<br>    echo “server.host: \”$zip\”” &gt;&gt; kibana.yml<br>    echo “elasticsearch.url: \”http://$zip:9200\”” &gt;&gt; kibana.yml<br>    PID=<code>ps -ef |grep kibana |grep -v grep |awk &#39;{print $2}&#39;</code><br>    if [ -n “$PID” ];then<br>                echo “检查到有之前残留的kibana进程，现在杀掉它！”<br>                kill -9 $PID<br>                echo “之前残留的kibana进程已经杀死，现在开始重新启动kibana!”<br>                cd /opt/aspire/product/ums/kibana-5.6.0-linux-x86_64/bin<br>        echo &gt; nohup.out<br>        nohup ./kibana &amp;<br>                sleep 5<br>        PID=<code>ps -ef |grep kibana |grep -v grep |awk &#39;{print $2}&#39;</code><br>        if [ -n “$PID” ];then<br>            echo -e “\033[32m kibana已经启动成功，进程号是$PID \033[0m”<br>        else<br>            echo -e “\033[31m kibana启动失败，请检查报错日志nohup.out文件！\033[0m”<br>            exit 0<br>        fi<br>    else<br>        cd /opt/aspire/product/ums/kibana-5.6.0-linux-x86_64/bin<br>                echo &gt; nohup.out<br>                nohup ./kibana &amp;<br>                sleep 10<br>        curl http://$zip:5601 &gt;/dev/null 2&gt;&amp;1<br>                  if [ $? -eq 0 ];then<br>                        echo -e “\033[32m kibana已经启动成功,请之后访问http://$zip:5601核对！\033[0m”<br>                else<br>                        echo -e “\033[31m kibana启动失败，请检查报错日志nohup.out文件！\033[0m”<br>                        exit 0<br>                fi<br>    fi<br>else<br>    echo “解压kibana-5.6.0-linux-x86_64.tar.gz包失败，请确保该包在/opt/aspire/product/ums/soft/目录”<br>    exit 0</p>
+<p>fi<br>}</p>
+<p>function nginx()<br>{<br>echo “#########################################################################################”<br>echo “现在开始编译安装nginx”<br>if [ -d /usr/local/nginx ];then<br>        echo “发现已经存在/usr/local/nginx目录！”<br>    read -p “是否用shell脚本清理之前的nginx,(y/n)” qk<br>    case $qk in<br>y)<br>rm -rf /usr/local/nginx &gt;&gt;/dev/null 2&gt;&amp;1<br>echo “之前的nginx目录已经清理！现在开始重新安装nginx!”<br>cd /opt/aspire/product/ums/soft<br>tar xvf nginx-1.14.0.tar -C /opt/aspire/product/ums/ &gt;&gt;/dev/null 2&gt;&amp;1<br>    if [ $? -eq 0 ];then<br>        mkdir /usr/local/nginx<br>            if [ $? -eq 0 ];then<br>                cd /opt/aspire/product/ums/nginx-1.14.0<br>                echo “<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>**</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>“<br>                echo “开始编译nginx,请等待…”<br>                ./configure –prefix=/usr/local/nginx &gt;./c.txt 2&gt;&amp;1<br>                if [ $? -eq 0 ];then<br>                    echo “nginx 编译成功！”<br>                    echo “<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>**</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>“<br>                    echo “开始安装nginx,请等待…”<br>                    make &gt;./m.txt 2&gt;&amp;1<br>                    make install &gt;&gt;./m.txt 2&gt;&amp;1<br>                    if [ $? -eq 0 ];then<br>                        echo -e “\033[32m nginx安装成功！\033[0m”<br>                        cp /opt/aspire/product/ums/soft/nginx.conf  /usr/local/nginx/conf<br>                        cd /usr/local/nginx/conf/<br>                        sed -i “s/$yIP/$yip/g” nginx.conf<br>                        echo “请使用root用户启动nginx!”<br>                        echo “到/usr/local/nginx/sbin 目录下”<br>                        echo “用root用户执行：./nginx -c  /usr/local/nginx/conf/nginx.conf”<br>                    else<br>                        echo -e “\033[31m nginx在make&amp;&amp;makeinstall过程中出现了问题，请查看nginx源码目中的m.txt文件查看报错日志！\033[0m”<br>                        exit 0<br>                    fi<br>                else<br>                    echo -e “\033[31m nginx编译过程报错，请查看nginx源码目中的c.txt文件查看报错日志！\033[0m”<br>                fi<br>            else<br>                echo “使用ums用户创建/usr/local/nginx目录失败，请检查用户权限！”<br>                exit 0<br>            fi<br>    else<br>        echo “解压nginx-1.14.0.tar包失败，请确保该包在/opt/aspire/product/ums/soft/目录”<br>        exit 0<br>    fi<br>;;<br>n)<br>echo “请先清理/usr/local/nginx目录！”<br>exit 0<br>;;<br>*)<br>echo “输入格式错误！”<br>exit 0<br>esac<br>else<br>    cd /opt/aspire/product/ums/soft<br>tar xvf nginx-1.14.0.tar -C /opt/aspire/product/ums/ &gt;&gt;/dev/null 2&gt;&amp;1<br>        if [ $? -eq 0 ];then<br>                mkdir /usr/local/nginx<br>                        if [ $? -eq 0 ];then<br>                                cd /opt/aspire/product/ums/nginx-1.14.0<br>                                echo “<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>**</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>“<br>                                echo “开始编译nginx!”<br>                                ./configure –prefix=/usr/local/nginx &gt;./c.txt 2&gt;&amp;1<br>                                if [ $? -eq 0 ];then<br>                    echo -e “\033[32m nginx编译成功！\033[0m”<br>                                        echo “<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>**</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>“<br>                                        echo “开始安装nginx!”<br>                    make &gt;./m.txt 2&gt;&amp;1<br>                                        make install &gt;&gt;./m.txt 2&gt;&amp;1<br>                                        if [ $? -eq 0 ];then<br>                                                echo -e “\033[32m nginx安装成功！\033[0m”<br>                        cp /opt/aspire/product/ums/soft/nginx.conf  /usr/local/nginx/conf<br>                                                cd /usr/local/nginx/conf/<br>                                                sed -i “s/$yIP/$yip/g” nginx.conf<br>                                                echo “请使用root用户启动nginx!”<br>                        echo “到/usr/local/nginx/sbin目录下”<br>                                                echo “用root用户执行：./nginx -c  /usr/local/nginx/conf/nginx.conf”<br>                                        else<br>                                                echo -e “\033[31m nginx在make&amp;&amp;makeinstall过程中出现了问题，请查看nginx源码目中的m.txt文件查看报错日志！\033[0m”<br>                                                exit 0<br>                                        fi<br>                                else<br>                                        echo -e “\033[31m nginx编译过程报错，请查看nginx源码目中的c.txt文件查看报错日志！\033[0m”<br>                                fi<br>                        else<br>                                echo “使用ums用户创建/usr/local/nginx目录失败，请检查用户权限！”<br>                                exit 0<br>                        fi<br>        else<br>                echo “解压nginx-1.14.0.tar包失败，请确保该包在/opt/aspire/product/ums/soft/目录”<br>                exit 0<br>        fi<br>fi</p>
+<p>}</p>
+<p>function berkeleydb()<br>{<br>echo “####################################################################”<br>echo “现在开始编译安装berkeleydb,请等待…”<br>cd /opt/aspire/product/ums/soft<br>tar xvf db-5.1.29.tar -C /opt/aspire/product/ums/ &gt;&gt;/dev/null 2&gt;&amp;1<br>    if [ $? -eq 0 ];then<br>        if [ -d /usr/local/berkeleydb ];then<br>        rm -rf /usr/local/berkeleydb<br>        mkdir /usr/local/berkeleydb<br>        cd /opt/aspire/product/ums/db-5.1.29/build_unix<br>        ../dist/configure –prefix=/usr/local/berkeleydb &gt; ./c.txt 2&gt;&amp;1<br>            if [ $? -eq 0 ];then<br>                echo “编译成功，开始安装berkeleydb！请等待…”<br>                make &amp;&amp; make install &gt;./m.txt 2&gt;&amp;1<br>                if [ $? -eq 0 ];then<br>                    echo -e “\033[32m berkeleydb已经安装成功！\033[0m”<br>                else<br>                    echo -e “\033[31m berkeleydb安装过程出了问题，请查看源码目录中的m.txt文件 \033[0m”<br>                fi<br>            else<br>                echo -e “\033[31m berkeleydb编译过程中出了问题，请查看源码目录中的c.txt文件 \033[0m”<br>            fi<br>        else<br>        mkdir /usr/local/berkeleydb<br>                cd /opt/aspire/product/ums/db-5.1.29/build_unix<br>                ../dist/configure –prefix=/usr/local/berkeleydb &gt; ./c.txt 2&gt;&amp;1<br>                        if [ $? -eq 0 ];then<br>                                echo “编译成功，开始安装berkeleydb！请等待…”<br>                                make &amp;&amp; make install &gt;./m.txt 2&gt;&amp;1<br>                                if [ $? -eq 0 ];then<br>                                        echo -e “\033[32m berkeleydb已经安装成功！\033[0m”<br>                                else<br>                                        echo “berkeleydb安装过程出了问题，请查看源码目录中的m.txt文件”<br>                                fi<br>                        else<br>                                echo “berkeleydb编译过程中出了问题，请查看源码目录中的c.txt文件”<br>                        fi<br>        fi<br>    else<br>        echo “解压db-5.1.29.tar包失败，请确保该包在/opt/aspire/product/ums/soft/目录”<br>        exit 0<br>    fi<br>}</p>
+<p>function openldap()<br>{<br>echo “#####################################################################”<br>echo “现在开始安装openldap”<br>cd /opt/aspire/product/ums/soft<br>tar xvf openldap-2.4.45.tar -C /opt/aspire/product/ums/ &gt;&gt;/dev/null 2&gt;&amp;1<br>    if [ $? -eq 0 ];then<br>        cd /opt/aspire/product/ums/openldap-2.4.45<br>        PID=<code>ps -ef |grep slapd |grep -v grep |awk &#39;{print $2}&#39;</code><br>            if [ -n “$PID” ];then<br>                echo “检查到有之前残留的slapd进程，现在杀掉它！”<br>                kill -9 $PID<br>                echo “之前残留的slapd进程已经杀死，现在开始重新启动slapd!”<br>        ./libexec/slapd -h ldap://$zip:2389<br>        sleep 5<br>        PID=<code>ps -ef |grep slapd |grep -v grep |awk &#39;{print $2}&#39;</code><br>                    if [ -n “$PID” ];then<br>                echo -e “\033[32m openldap已经启动成功，PID是$PID \033[0m”<br>            else<br>                echo -e “\033[31m openldap启动失败，请自行检查！\033[0m”<br>                exit 0<br>            fi<br>          else<br>        cd /opt/aspire/product/ums/openldap-2.4.45<br>        ./libexec/slapd -h ldap://$zip:2389<br>                sleep 5<br>                PID=<code>ps -ef |grep slapd |grep -v grep |awk &#39;{print $2}&#39;</code><br>                    if [ -n “$PID” ];then<br>                               echo -e “\033[32m openldap已经启动成功，PID是$PID \033[0m”<br>                    else<br>                            echo -e “\033[31m openldap启动失败，请自行检查！\033[0m”<br>                            exit 0<br>                    fi<br>        fi<br>    else<br>        echo “解压openldap-2.4.45.tar包失败，请确保该包在/opt/aspire/product/ums/soft/目录”<br>        exit 0<br>    fi<br>}</p>
+<p>function keycloak()<br>{<br>echo “##########################################################################”<br>echo “现在开始安装keycloak”<br>cd /opt/aspire/product/ums/soft<br>tar xvf keycloak-3.2.1.Final.tar -C /opt/aspire/product/ums/ &gt;&gt;/dev/null 2&gt;&amp;1<br>    if [ $? -eq 0 ];then<br>        cd /opt/aspire/product/ums/keycloak-3.2.1.Final/standalone/configuration<br>        sed -i “s/$zIP/$zip/g” standalone.xml<br>        PID=<code>ps -ef |grep keycloak |grep -v grep |awk &#39;{print $2}&#39;</code><br>             if [ -n “$PID” ];then<br>                    echo “检查到有之前残留的keycloak进程，现在杀掉它！”<br>                     kill -9 $PID<br>                     echo “之前残留的keycloak进程已经杀死，现在开始重新启动keycloak!”<br>            cd /opt/aspire/product/ums/keycloak-3.2.1.Final/<br>            echo &gt; ./bin/nohup.out<br>            nohup ./bin/standalone.sh -Djboss.socket.binding.port-offset=100 &amp;<br>            sleep 10<br>            PID=<code>ps -ef |grep keycloak |grep -v grep |awk &#39;{print $2}&#39;</code><br>                if [ -n “$PID” ];then<br>                    echo -e “\033[32m keycloak已经启动成功，请用火狐浏览器打开http://$zip:8180 \033[0m”<br>                    echo “请按照文档在界面中配置”<br>                    echo “登录用户和密码都是:admin”<br>                else<br>                    echo -e “\033[31m keycloak启动失败，请检查报错日志nohup.out日志文件 \033[0m”<br>                fi<br>        else<br>               cd /opt/aspire/product/ums/keycloak-3.2.1.Final/<br>                        echo &gt; ./bin/nohup.out<br>                        nohup ./bin/standalone.sh -Djboss.socket.binding.port-offset=100 &amp;<br>            sleep 10<br>                        PID=<code>ps -ef |grep keycloak |grep -v grep |awk &#39;{print $2}&#39;</code><br>                                 if [ -n “$PID” ];then<br>                                         echo -e “\033[32m keycloak已经启动成功，请用火狐浏览器打开http://$zip:8180 \033[0m”<br>                                         echo “请按照文档在界面中配置”<br>                                         echo “登录用户和密码都是:admin”<br>                                 else<br>                                         echo -e “\033[31m keycloak启动失败，请检查报错日志nohup.out日志文件 \033[0m”<br>                     exit 0<br>                                 fi<br>        fi<br>    else<br>        echo “解压keycloak-3.2.1.Final.tar包失败，请确保该包在/opt/aspire/product/ums/soft/目录”<br>        exit 0<br>    fi</p>
+<p>}</p>
+<p>echo “#################################################”<br>echo “#                                               #”<br>echo “#         该脚本是一键安装ums中间件             #”<br>echo “#                                               #”<br>echo “#################################################”<br>echo “以下是要安装的插件名(all代表全部按顺序安装)”<br>echo “jdk  zookeeper  elasticsearch  kafka  redis  nginx  kibana  berkeleydb  openldap  keycloak  all”<br>echo “第一次执行该脚本请选择 all “<br>read -p “请输入您要安装的插件名字：” mokuai<br>case $mokuai in<br>jdk)<br>jdk;;<br>zookeeper)<br>zookeeper;;<br>elasticsearch)<br>elasticsearch;;<br>kafka)<br>kafka;;<br>redis)<br>redis;;<br>nginx)<br>nginx;;<br>kibana)<br>kibana;;<br>berkeleydb)<br>berkeleydb;;<br>openldap)<br>openldap;;<br>keycloak)<br>keycloak;;<br>all)<br>jdk &amp;&amp; zookeeper &amp;&amp; elasticsearch &amp;&amp; kafka &amp;&amp; redis &amp;&amp; nginx &amp;&amp; kibana &amp;&amp; berkeleydb &amp;&amp; openldap &amp;&amp; keycloak<br>;;<br>*)<br>echo “输入错误！”<br>exit 0<br>esac</p>
+<p>（5）部署ums应用主机，首先使用root用户执行root.sh脚本，该脚本是创建ums用户和配置环境的脚本<br>（6）之后使用ums用户，在ums家目录/opt/aspire/product/ums目录下执行getfile.sh脚本，改脚本是获取软件包的脚本（根据脚本的提示选择正确的选项执行脚本）<br>（7）确保前2个脚本执行成功后，然后用ums用户在家目录执行config-server.sh脚本，该脚本是解压安装ums应用并修改配置文件的脚本，请仔细看脚本提示，选择正确的选项执行该脚本！<br>（8）确保前2个脚本执行完毕无报错后，可以执行startall.sh脚本启动ums应用，该脚本是一键启动ums应用的脚本（ums应用一共有15个jar包，都要启动），该脚本有2个功能1是全部启动，2是单独启动ums某个jar包</p>
+<p>这种情况代表eureka包启动成功</p>
+<p>这种情况代表启动失败，请到对应的目录下查看nohup.out文件，查看报错日志，解决后可以在执行startall.sh脚本单独启动这个模块</p>
+<p>出现这种情况请注意了，判断某个jar包是否启动成功，需要2点，（1）查看进程是否有拉起（2）查看nohup.out日志文件是否有JVM关键字。2者都满足则代表启动成功，如果只满足条件1就会出现上图的情况，需要你自己查看nohup.out文件，由于jar包启动是需要时间的，我在脚本中设定在拉起进程后，查看nohup.out文件的时间是100秒，如果100秒后，jar包还没有刷出JVM并且也没有报错，请等待一会等它刷出JVM,如果有报错，请解决后在重启该模块。</p>
+<p>stopall.sh脚本是一键停止ums应用所有进程</p>
+<p>ums应用进程全部启动完毕请联系二线，中途有什么问题请联系二线</p>
+
+    </div>
+    
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2019/04/29/我的python例题/" class="next-post btn btn-default" title="我的python例题">
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs">我的python例题</span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	
+    <div id="vcomments" class="valine"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="/assets/valine.min.js"></script>
+
+    <script>
+        new Valine({
+            av: AV,
+            el: '#vcomments',
+            appId: 'xOKV9J4UeQAtVkvnJC7Kq2Jn-gzGzoHsz',
+            appKey: 'erIpQac4azoCmgfBB7Dl9maa',
+            placeholder: '说点什么吧',
+            notify: false,
+            verify: false,
+            avatar: 'mm',
+            meta: 'nick,mail'.split(','),
+            pageSize: '10',
+            path: window.location.pathname,
+            lang: ''.toLowerCase()
+        })
+    </script>
+
+
+    </div>
+
+
+
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">Table of Contents</h3>
+        
+            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#bash-profile"><span class="toc-text">.bash_profile</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Get-the-aliases-and-functions"><span class="toc-text">Get the aliases and functions</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#User-specific-environment-and-startup-programs"><span class="toc-text">User specific environment and startup programs</span></a></li></ol>
+        
+    </div>
+</aside>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</footer>
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="busuanzi">
+    
+</div>
+
+            </div>
+            <div class="col-sm-12">
+                <span>Copyright &copy; 2017
+                </span> |
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> |
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+</body>
+</html>
