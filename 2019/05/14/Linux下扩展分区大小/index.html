@@ -19,7 +19,8 @@
     <meta name="keywords" content>
 
 
-    <meta name="description" content>
+    <meta name="description" content="需求：现网miscfile目录只有2G空间，目前需要扩大到8G左右当前挂载情况如下：
+由于分区大小已经固定，所以想要扩展空间需要做成逻辑卷！然后通过vgextend + 新的分区来扩展空间(1)...">
 
 
 
@@ -172,7 +173,10 @@
     </div>
     
     <div class="post-body post-content">
-        
+        <p>需求：现网miscfile目录只有2G空间，目前需要扩大到8G左右<br>当前挂载情况如下：<br><img src="/2019/05/14/Linux下扩展分区大小/1.png" alt="df -h"></p>
+<p>由于分区大小已经固定，所以想要扩展空间需要做成逻辑卷！然后通过vgextend + 新的分区来扩展空间<br>(1) 划分新的逻辑分区<br><img src="/2019/05/14/Linux下扩展分区大小/2.png" alt="fdisk /dev/sdb  sdb6就是新划分的分区"><br>(2) 把sdb5分区做成物理卷,并扩展空间<br><img src="/2019/05/14/Linux下扩展分区大小/3.png" alt="如下图"><br>(3) 从扩展的卷组中，划分逻辑卷<br><img src="/2019/05/14/Linux下扩展分区大小/4.png" alt="lvcreate "><br>(4) 重新格式化，并挂载<br>mkfs.ext4 /dev/vgmiscfile/lvmiscfile<br>e2label /dev/vgmiscfile/lvmiscfile /miscfile<br>mount -a<br><img src="/2019/05/14/Linux下扩展分区大小/5.png" alt="如下图"></p>
+<p>好啦，miscfile目录空间已经扩大了，而且做成逻辑卷后，空间再次扩大或者缩小都会很方便</p>
+
     </div>
     
     <div class="post-footer">
